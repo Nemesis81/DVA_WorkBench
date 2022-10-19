@@ -21,6 +21,9 @@ working steps are the following:
 results are in the output folder for post treatment.
 
 ## to do:
-1. devlop sensitive analysis
-1. integrate a html report directly in freecad
-2. link DVA constraint and DVA point within DVA folder for clarity
+1. develop different kind of analysis:
+  * Monte carlo analysis.
+  * sensitive analysis based on HLM (High Mean Low) values of each tolerance of the assembly
+  * Worst Case analysis based on all value in Max/min condition (need to no direction of impact....)
+2. integrate a html report directly in freecad (Streamlit? matplot only?)
+3. link DVA constraint and DVA point within DVA folder for clarity.
