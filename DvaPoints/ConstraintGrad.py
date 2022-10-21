@@ -20,7 +20,7 @@ class cmd_DvaPointDg():
         """
         Object creation method
         """
-        
+
         obj = Gui.Selection.getSelection()
         dvaPointDg(obj)
         App.ActiveDocument.recompute()
@@ -50,6 +50,7 @@ class dvaPointDg():
         Called on document recompute
         """
         App.ActiveDocument.recompute()
+
 Gui.addCommand("DVA Point DownGrading", cmd_DvaPointDg())
 
 
@@ -67,7 +68,7 @@ class cmd_dvaPointUg():
         """
         Object creation method
         """
-        
+
         objg = Gui.Selection.getSelection()
         dvaPointUg(objg)
         App.ActiveDocument.recompute()
@@ -81,7 +82,7 @@ class cmd_dvaPointUg():
 
 
 class dvaPointUg():
-    
+
     def __init__(self, objg):
         """
         Default constructor
@@ -100,5 +101,5 @@ class dvaPointUg():
         Called on document recompute
         """
         App.ActiveDocument.recompute()
-        
+
 Gui.addCommand("DVA Point UpGrading", cmd_dvaPointUg())

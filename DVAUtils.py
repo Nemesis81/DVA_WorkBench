@@ -21,7 +21,7 @@ def listDvaPoints(Objs):
 
 
 def listAssyConstraints(Objs):
-    """Rerurn a list of Constraints upgrade in DVA constraints """
+    """Re-run a list of Constraints upgrade in DVA constraints """
     ctrList=[]
     for obj in Objs:
         if hasattr(obj, "Law"):

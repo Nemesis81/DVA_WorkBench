@@ -50,9 +50,10 @@ class dvaAnalysis():
         obj.addProperty("App::PropertyInteger", "Sample", "DVA", "quantity of loop in DVA analysis").Sample
         obj.addProperty('App::PropertyEnumeration', 'Cp', 'DVA', 'Cp level expected').Cp
         obj.Cp = [1, 1.33, 1.67, 2]
-        obj.addProperty("App::PropertyFile", "Output_File", "DVA", "Path of the output file")
+        obj.addProperty("App::PropertyFile", "OutputFile", "DVA", "Path of the output file")
+        obj.addProperty("App::PropertyStringList", "ListPoints", "DVA", "List of measured point to be ouputed to the file")
 
-    def execute(self, obj):
+    def execute(self, obj): 
         """
         Called on document recompute
         """

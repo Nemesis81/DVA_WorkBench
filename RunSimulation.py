@@ -3,7 +3,7 @@
 # Macro Begin: C:\Users\thierry.garel\AppData\Roaming\FreeCAD\Macro\changeTolernace.FCMacro ++++
 import FreeCAD
 import numpy as np
-import csv   
+import csv
 import DVAUtils as dvu
 import time
 from datetime import timedelta
@@ -19,7 +19,7 @@ class cmd_runSimulationMC():
                 "Accel"   : "Shift+S", # a default shortcut (optional)
                 "MenuText": "Create DVA Point",
                 "ToolTip" : "Create a DVA point inside the active body if there is one"}
-                
+
 
 
     def Activated(self):
@@ -31,13 +31,12 @@ class cmd_runSimulationMC():
         print("starting simulation at: ", start)
         Doc= FreeCAD.ActiveDocument
         FilePath = Doc.getObject("DVA_Analysis").Output_File
-        ##"# preparing the file
-        file1 = open(FilePath, "w")
-        L = []
 
-        file1.writelines(L)
-        file1.close
-        file1 = open(FilePath, "a")
+        with open(FilePath, "w", newline="") as f:
+            data = csv.writer(f)
+            dele=[]
+            data.writerow(dele)
+        f.close
 
         ### DVA_Points referes to points with a tolerance inside a Body
         ### in the case study
