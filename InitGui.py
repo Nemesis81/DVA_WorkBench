@@ -12,7 +12,7 @@ class DVA_Wb (Workbench):
 
     MenuText = "DVA Workbench"
     ToolTip = "A description of my workbench"
-    #Icon = "Plot_workbench_icon.svg"
+    Icon = "Plot_workbench_icon.svg"
 
     def Initialize(self):
         """This function is executed when the workbench is first activated.
@@ -21,10 +21,11 @@ class DVA_Wb (Workbench):
         import DvaPoints.DVAPoints as dvp # import here all the needed files that create your FreeCAD commands
         import DvaPoints.ConstraintGrad as dvc
         import DVAAnalysis as dva
-        self.list = [dvp.cmd_dvaPoint(),
-                     dvc.cmd_DvaPointDg(),
-                     dvc.cmd_dvaPointUg(),
-                     dva.cmd_dvaAnalysis() ]      # A list of command names created in the line above
+        self.list = ["DVA Point Creation", "DVA Point UpGrading"]
+        #self.list = [dvp.cmd_dvaPoint(),
+                     #dvc.cmd_DvaPointDg(),
+                     #dvc.cmd_dvaPointUg(),
+                     #dva.cmd_dvaAnalysis() ]      # A list of command names created in the line above
         self.appendToolbar("DVA",self.list) # creates a new toolbar with your commands
         self.appendMenu("DVA tool",self.list) # creates a new menu
         #self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu

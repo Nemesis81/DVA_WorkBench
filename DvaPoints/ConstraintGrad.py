@@ -34,7 +34,6 @@ class cmd_DvaPointDg():
 
 
 class dvaPointDg():
-
     def __init__(self, objg):
         """
         Default constructor
@@ -82,7 +81,6 @@ class cmd_dvaPointUg():
 
 
 class dvaPointUg():
-
     def __init__(self, objg):
         """
         Default constructor

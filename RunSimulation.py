@@ -3,6 +3,7 @@
 # Macro Begin: C:\Users\thierry.garel\AppData\Roaming\FreeCAD\Macro\changeTolernace.FCMacro ++++
 import FreeCAD
 import numpy as np
+import pandas as pd
 import csv
 import DVAUtils as dvu
 import time

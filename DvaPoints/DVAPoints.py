@@ -29,7 +29,7 @@ class cmd_dvaPoint():
             print("No active Body")
         else:
             body.addObject(obj)
-            
+
         App.ActiveDocument.recompute()
         return
 
@@ -38,10 +38,8 @@ class cmd_dvaPoint():
         are met or not. This function is optional."""
         return True
 
-Gui.addCommand("DVA Point Creation", cmd_dvaPoint())
 
 class dvaPoint():
-
     def __init__(self, obj):
         """
         Default constructor
@@ -57,8 +55,8 @@ class dvaPoint():
         obj.addProperty('App::PropertyLength', 'Sd', 'DVA', 'standard deviation').Sd = '0.15 mm'
         obj.addProperty('App::PropertyLength', 'Meanshift', 'DVA', 'optional meanshift').Meanshift = '0 mm'
         obj.addProperty("App::PropertyBool", "Measurement", "DVA", "Statement to output the simulation values of this point").Measurement = True
-     
-    
+
+
     def onChanged(self, obj, prop):
         """
         gives define the data according input
@@ -69,19 +67,23 @@ class dvaPoint():
         # print("line 68")
         # cp = App.ActiveDocument.getObject("DVA_Analysis")
         # print(cp)
-        
+
         # if type(cp) == 'NoneType':
             # print('No DVA Analysis !')
         # else:
             # cp = doc.getObject("DVA_Analysis").Cp
             # print(cp)
             # obj.Sd = Tolerance / (6*cp)
-     
+
     def execute(self, obj):
         """
         Called on document recompute
         """
         App.ActiveDocument.recompute()
-        
+
     def onDocumentRestored(self, obj):
         obj.Proxy = self
+
+
+
+Gui.addCommand("DVA Point Creation", cmd_dvaPoint())
