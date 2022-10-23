@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2816"
+   height="64px"
+   width="64px"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="DVA_RunHLM_Simulation.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2492"
+     inkscape:window-height="1411"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-global="true"
+     inkscape:zoom="12.297465"
+     inkscape:cx="58.686833"
+     inkscape:cy="43.058391"
+     inkscape:window-x="68"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2816"
+     inkscape:snap-bbox="true"
+     inkscape:document-rotation="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2818" />
+  <metadata
+     id="metadata2821">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+        <dc:title>Path-Heights</dc:title>
+        <dc:date>2016-05-15</dc:date>
+        <dc:relation>http://www.freecadweb.org/wiki/index.php?title=Artwork</dc:relation>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>FreeCAD</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>FreeCAD/src/Mod/Path/Gui/Resources/icons/Path-Heights.svg</dc:identifier>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>FreeCAD LGPL2+</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <cc:license>https://www.gnu.org/copyleft/lesser.html</cc:license>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>[agryson] Alexander Gryson</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.9642px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.674105"
+     x="-0.16678351"
+     y="21.386335"
+     id="text225"
+     transform="scale(0.77313085,1.2934421)"><tspan
+       sodipodi:role="line"
+       id="tspan837"
+       x="-0.16678351"
+       y="21.386335"
+       style="stroke-width:0.674105">H.L.M.</tspan></text>
+  <rect
+     style="fill:#ff0000;fill-opacity:0.859619;stroke-width:1.087;paint-order:stroke markers fill"
+     id="rect839"
+     width="18.5"
+     height="11.5"
+     x="1.5"
+     y="29.5" />
+  <rect
+     style="fill:#0000ff;fill-opacity:0.859619;stroke-width:1.11679;paint-order:stroke markers fill"
+     id="rect841"
+     width="19"
+     height="12"
+     x="20"
+     y="51" />
+  <rect
+     style="fill:#00ff00;fill-opacity:0.859619;stroke-width:1.087;paint-order:stroke markers fill"
+     id="rect843"
+     width="19"
+     height="10"
+     x="39"
+     y="41" />
+</svg>

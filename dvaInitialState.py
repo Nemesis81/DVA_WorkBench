@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #DVAUtils compile dunction used in various algorythm for DVA
-#list of point, storage of value 
+#list of point, storage of value
 #
 
 import FreeCAD as app
@@ -20,17 +20,16 @@ initialState = {}
 dict = {}
 c = 0
 for i in test:
-    b=doc.getObject(test[c])
-    dict[i]=(b.Law,
-             b.Tolerance, 
-             b.Meanshift, 
-             b.Sd)
+    b = doc.getObject(test[c])
+    dict[i] = (b.Law,
+               b.Tolerance,
+               b.Meanshift,
+               b.Sd)
+
     if b.TypeId != 'App::FeaturePython':
-        dict[i]+= (b.AttachmentOffset.Base.x,
+        dict[i] += (b.AttachmentOffset.Base.x,
                     b.AttachmentOffset.Base.y,
                     b.AttachmentOffset.Base.z)
     elif b.TypeId != 'PartDesign::Point':
-        dict[i]+= b.Distance
+        dict[i] += b.Distance
     c+=1
-    
-    

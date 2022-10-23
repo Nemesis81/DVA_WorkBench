@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import FreeCAD as App
-import PartDesign
-import Part
+# import PartDesign
+# import Part
 import FreeCADGui as Gui
+import os
 
+TOOL_ICON =os.path.join(App.getUserAppDataDir(),"Mod", "DVAWB", "ressources","DVA_Points.svg")
 
 
 class cmd_dvaPoint():
     """My new command"""
 
     def GetResources(self):
-        return {"Pixmap"  : "PartDesign_Point.svg", # the name of a svg file available in the resources
+        return {"Pixmap"  : TOOL_ICON, # the name of a svg file available in the resources
                 "Accel"   : "Shift+S", # a default shortcut (optional)
                 "MenuText": "Create DVA Point",
                 "ToolTip" : "Create a DVA point inside the active body if there is one"}

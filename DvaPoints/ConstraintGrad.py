@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import FreeCAD as App
-import PartDesign
-import Part
+# import PartDesign
+# import Part
 import FreeCADGui as Gui
 
 
