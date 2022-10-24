@@ -1,17 +1,23 @@
 
 import FreeCAD as App
-import PartDesign
-import Part
+# import PartDesign
+# import Part
 import FreeCADGui as Gui
+import os
 
+TOOL_ICON = os.path.join(App.getUserAppDataDir(),
+                         "Mod",
+                         "DVAWB",
+                         "ressources",
+                         "DVA_Analysis.svg")
 
 
 class cmd_dvaAnalysis():
     """Add DVA analysis to the document"""
 
     def GetResources(self):
-        return {"Pixmap"  : "Draft_Annotation_Style.svg", # the name of a svg file available in the resources
-                "Accel"   : "Shift+S", # a default shortcut (optional)
+        return {"Pixmap"  : TOOL_ICON,  # the name of a svg file available in the resources
+                "Accel"   : "Shift+S",  # a default shortcut (optional)
                 "MenuText": "Create DVA Point",
                 "ToolTip" : "Create a DVA point inside the active body if there is one"}
 
@@ -20,8 +26,9 @@ class cmd_dvaAnalysis():
         Object creation method
         """
 
-        obj = App.ActiveDocument.addObject('App::DocumentObjectGroup', "DVA_Analysis")
-        
+        obj = App.ActiveDocument.addObject('App::DocumentObjectGroup',
+                                           "DVA_Analysis")
+
         dvaAnalysis(obj)
         #ViewProviderDvaAnalysis(obj.ViewObject)
         App.ActiveDocument.recompute()
@@ -35,7 +42,6 @@ class cmd_dvaAnalysis():
 
 
 class dvaAnalysis():
-
     def __init__(self, obj):
         """
         Default constructor
@@ -43,9 +49,7 @@ class dvaAnalysis():
 
         self.Type = 'dvaAnalysis'
 
-        #obj.Proxy = self
-
-        obj.addProperty('App::PropertyEnumeration', 'AnalysisType', 'DVA', 'Analisys type , Monte Carlo or HLM, ').AnalysisType
+        obj.addProperty('App::PropertyEnumeration', 'AnalysisType', 'DVA', 'Analisys type, Monte Carlo or HLM, ').AnalysisType
         obj.AnalysisType = ["Monte Carlo", "High Low Mean"]
         obj.addProperty("App::PropertyInteger", "Sample", "DVA", "quantity of loop in DVA analysis").Sample
         obj.addProperty('App::PropertyEnumeration', 'Cp', 'DVA', 'Cp level expected').Cp
@@ -53,15 +57,14 @@ class dvaAnalysis():
         obj.addProperty("App::PropertyFile", "OutputFile", "DVA", "Path of the output file")
         obj.addProperty("App::PropertyStringList", "ListPoints", "DVA", "List of measured point to be ouputed to the file")
 
-    def execute(self, obj): 
+    def execute(self, obj):
         """
         Called on document recompute
         """
         App.ActiveDocument.recompute()
-        
+
 
 class ViewProviderDvaAnalysis:
-
     def __init__(self, obj):
         """
         Set this object to the proxy object of the actual view provider

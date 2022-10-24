@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg2816"
+   height="64px"
+   width="64px"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
+   sodipodi:docname="DVA_RunMC_Simulation.svg">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="2492"
+     inkscape:window-height="1411"
+     id="namedview8"
+     showgrid="true"
+     inkscape:snap-global="true"
+     inkscape:zoom="12.297465"
+     inkscape:cx="66.533979"
+     inkscape:cy="43.058391"
+     inkscape:window-x="68"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2816"
+     inkscape:snap-bbox="true"
+     inkscape:document-rotation="0">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="2"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2818" />
+  <metadata
+     id="metadata2821">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <dc:title>Path-Heights</dc:title>
+        <dc:date>2016-05-15</dc:date>
+        <dc:relation>http://www.freecadweb.org/wiki/index.php?title=Artwork</dc:relation>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>FreeCAD</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>FreeCAD/src/Mod/Path/Gui/Resources/icons/Path-Heights.svg</dc:identifier>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>FreeCAD LGPL2+</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <cc:license>https://www.gnu.org/copyleft/lesser.html</cc:license>
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>[agryson] Alexander Gryson</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <path
+     style="fill:#00ff00;stroke:#000000;stroke-width:0.918906px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 2,55.077806 c 23,0 19,-37.997484 30,-37.997484 7,0 10,37.997484 29,37.997484"
+     id="path177"
+     sodipodi:nodetypes="ccc" />
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:19.2039px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.480096"
+     x="10.782925"
+     y="16.214575"
+     id="text225"
+     transform="scale(0.99021439,1.0098823)"><tspan
+       sodipodi:role="line"
+       id="tspan223"
+       x="10.782925"
+       y="16.214575"
+       style="stroke-width:0.480096">M.C.</tspan></text>
+  <path
+     style="fill:#ff0000;stroke:#ff0000;stroke-width:0.89259px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 2.4590592,56 c 0,0 8.9429458,-1.013321 8.9720158,-3.224146 l -0.141259,10.743094 -8.8101404,0.0059 z"
+     id="path227"
+     sodipodi:nodetypes="csccc" />
+  <path
+     style="fill:#0000ff;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.997697px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 11.429242,2.2852873 V 64"
+     id="path179"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:#ff0000;stroke:#ff0000;stroke-width:0.895907px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 60.575367,56 c 0,0 -9.374029,-2.431637 -9.369469,-4.171964 l -0.03084,11.771419 9.379539,-0.07558 z"
+     id="path227-7"
+     sodipodi:nodetypes="csccc" />
+  <path
+     style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="M 51,2 V 64"
+     id="path179-3"
+     inkscape:connector-type="polyline"
+     inkscape:connector-curvature="0" />
+</svg>

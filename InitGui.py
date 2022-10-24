@@ -2,30 +2,38 @@
 import os
 import FreeCAD
 import FreeCADGui
+import os
+
+
 
 __title__ = "FreeCAD DVA Workbench - Init file"
 __author__ = "Nemesis81"
 __url__ = "none"
 
 
+
 class DVA_Wb (Workbench):
 
+    ICONPATH = os.path.join(FreeCAD.getUserAppDataDir(),"Mod", "DVAWB", "ressources")
     MenuText = "DVA Workbench"
     ToolTip = "A description of my workbench"
-    Icon = "Plot_workbench_icon.svg"
+    Icon = os.path.join(ICONPATH, "DVA_RunMC_Simulation.svg")
 
     def Initialize(self):
         """This function is executed when the workbench is first activated.
         It is executed once in a FreeCAD session followed by the Activated function.
         """
-        import DvaPoints.DVAPoints as dvp # import here all the needed files that create your FreeCAD commands
-        import DvaPoints.ConstraintGrad as dvc
-        import DVAAnalysis as dva
-        self.list = ["DVA Point Creation", "DVA Point UpGrading"]
-        #self.list = [dvp.cmd_dvaPoint(),
-                     #dvc.cmd_DvaPointDg(),
-                     #dvc.cmd_dvaPointUg(),
-                     #dva.cmd_dvaAnalysis() ]      # A list of command names created in the line above
+        import DvaPoints.DVAPoints #as dvp
+        import DvaPoints.ConstraintGrad # as dvc
+        import DVAAnalysis #as dva
+        import RunSimulation
+        self.list = ["DVA Analisys Creation",
+                     "DVA Point Creation",
+                     "DVA Point UpGrading",
+                     "DVA Point DownGrading",
+                     "Run H.L.M. Simulation",
+                     "Run MonteCarlo Simulation"]
+
         self.appendToolbar("DVA",self.list) # creates a new toolbar with your commands
         self.appendMenu("DVA tool",self.list) # creates a new menu
         #self.appendMenu(["An existing Menu","My submenu"],self.list) # appends a submenu to an existing menu
