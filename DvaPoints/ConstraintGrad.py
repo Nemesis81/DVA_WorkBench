@@ -6,7 +6,6 @@ import FreeCAD as App
 import FreeCADGui as Gui
 
 
-
 class cmd_DvaPointDg():
     """My new command"""
 
@@ -50,8 +49,8 @@ class dvaPointDg():
         """
         App.ActiveDocument.recompute()
 
-Gui.addCommand("DVA Point DownGrading", cmd_DvaPointDg())
 
+Gui.addCommand("DVA Point DownGrading", cmd_DvaPointDg())
 
 
 class cmd_dvaPointUg():

@@ -4,12 +4,12 @@ class AttachedPoint():
         obj.Proxy = self
         obj.addExtension('Part::AttachExtensionPython')
         self.Type = "AttachedPoint"
-        
+
     def execute(self, obj):
         # We need to import the FreeCAD module here too, because we might be running out of the Console
         # (in a macro, for example) where the FreeCAD module has not been imported automatically:
-        import FreeCAD
-        import Part
+#        import FreeCAD
+#        import Part
 
         f = Part.Point(App.Vector(0, 0, 0)).toShape()
         obj.positionBySupport() #add attachment
@@ -44,6 +44,6 @@ if len(sels) == 1 and sels[0].HasSubObjects and len(sels[0].SubObjects) == 1 and
     point.MapPathParameter = mapPathParameter
     doc.recompute()
     #App.Console.PrintMessage(f'\npicked loc {pickLoc}\n point loc {point.Shape.Point}\n  curve loc {globalPlacement.inverse().multVec(curveLoc)}\n')
-    
+
 else:
     App.Console.PrintMessage(f'Select a single Edge, then run the Macro')

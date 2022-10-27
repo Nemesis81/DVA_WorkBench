@@ -13,13 +13,13 @@ import os
 
 TOOL_ICONMC = os.path.join(App.getUserAppDataDir(),
                            "Mod",
-                           "DVAWB",
+                           "DVA_WorkBench",
                            "ressources",
                            "DVA_RunMC_Simulation.svg")
 
 TOOL_ICONHLM = os.path.join(App.getUserAppDataDir(),
                             "Mod",
-                            "DVAWB",
+                            "DVA_WorkBench",
                             "ressources",
                             "DVA_RunHLM_Simulation.svg")
 
@@ -40,8 +40,8 @@ class cmd_runMcSimulation():
         start = time.time()
         print("starting simulation at: ", start)
         Doc= App.ActiveDocument
-        FilePath = Doc.getObject("DVA_Analysis").Output_File
-
+        FilePath = Doc.getObject("DVA_Analysis").OutputFile
+        Repet = Doc.getObject("DVA_Analysis").Sample
         with open(FilePath, "w", newline="") as f:
             data = csv.writer(f)
             dele = []
@@ -57,52 +57,16 @@ class cmd_runMcSimulation():
         Contraintes = Doc.findObjects("App::FeaturePython")
         Contraintes = dvu.listAssyConstraints(Contraintes)
 
-        Repet = Doc.getObject("DVA_Analysis").Sample
-
+        DvaPts = DvaPts + Contraintes
         # Mesure are the measurement from Assy3 with DVA upgrade
-        Mesure = Doc.getObject("DVA_Analysis").DVA_ListPoints
-        InitialState = dvu.initialStateSave(Contraintes + DvaPts, Doc)
+        Mesure = Doc.getObject("DVA_Analysis").ListPoints
+        InitialState = dvu.initialStateSave(Contraintes + DvaPts)
 
         for x in np.arange(0, Repet, 1):
             a = []
             b = []
-            for Cstr in Contraintes:
-                Variation = Doc.getObject(Cstr)
-                Variation.Distance = str(dvu.affectValue(Variation.Law,
-                                                         tolerance=Variation.Tolerance,
-                                                         sigma=Variation.Sd))
-                if Variation.Measurement:
-                    a.append(float(Variation.Distance))
-                    if x == 0: b.append(Variation.Label)
 
-            for dvaPt in DvaPts:
-                Variation = Doc.getObject(dvaPt)
-                Variation.AttachmentOffset.Base.x = Variation.AttachmentOffset.Base.x
-                + dvu.affectValue(Variation.Law,
-                tolerance=Variation.Tolerance)
-
-                Variation.AttachmentOffset.Base.y = Variation.AttachmentOffset.Base.y
-                + dvu.affectValue(Variation.Law,
-                tolerance=Variation.Tolerance)
-
-                Variation.AttachmentOffset.Base.z = Variation.AttachmentOffset.Base.z
-                + dvu.affectValue(Variation.Law,
-                tolerance=Variation.Tolerance)
-
-                App.ActiveDocument.recompute()
-
-                if hasattr(Variation,"Measurement"):
-                    if Variation.Measurement:
-                        a.extend(dvu.recordMeasurement(Variation))
-
-                        if x==0:
-                            b.extend((Variation.Label + " x",
-                                      Variation.Label + " y",
-                                      Variation.Label + " z",
-                                      Variation.Label + " GPx",
-                                      Variation.Label + " GPy",
-                                      Variation.Label + " GPz"))
-
+            dvu.dvaPtRndVal(DvaPts, a, b, x)
             Gui.runCommand('asm3CmdSolve',0)
 
             for mes in Mesure:
@@ -112,53 +76,42 @@ class cmd_runMcSimulation():
                         a.append(float(MesPt.Distance))
                         if x==0:
                             b.append(MesPt.Label)
+
             if x==0:
                 dtNames = np.asarray(b)
                 dtNames = np.expand_dims(dtNames,axis=1)
-                #print("shape dtNames: ", dtNames.shape)
 
-
-
-            #print("shape dtNames: ", dtNames.shape)
             dt = np.asarray(a)
-            #dt=np.expand_dims(dt,axis=1)
-
             dt=np.expand_dims(dt,axis=1)
 
             if x==0:
-                # with open(FilePath, "a", newline='') as f:
-                    # data = csv.writer(f)
-                    # data.writerow(b)
-                # f.close
-
                 dt2=dt
+
             dt2=np.append(dt2,dt, axis=1)
-            #print("dt shape is: ",dt.shape)
-
-            # with open(FilePath, "a", newline="") as f:
-                # data = csv.writer(f)
-                # data.writerow(a)
-
-            f.close
             dvu.backInitialState(InitialState, Doc)
-        a=np.transpose(a)
-        b=np.transpose(b)
+            #Gui.updateGui()
+            print("simulation loop:", x)
+
         dtfull = np.concatenate((dtNames,dt2), axis=1)
         dtfull = np.transpose(dtfull)
         pddf = pd.DataFrame(data=dtfull[1:,1:],
                             columns=dtfull[0,1:],
                             dtype=float)
-        print("achived dispersion= ", round(pddf.std()*6, 3))
-        hist = pddf['PointsPlaneDistance001'].hist(bins=8)
-        #np.savetxt(FilePath, dtfull, fmt='%s', delimiter = ',', newline='\n')
+
+        hist = pddf[["Measure1 GPy",
+                      "Measure1 GPx",
+                      "Measure1 GPz",
+                      "MeasurePointPlane",
+                      "MeasurePointPlane001",
+                      "MeasurePointPlane002"]].hist(bins=6)
+
         pddf.to_csv(FilePath, sep=',', header=True)
 
-
-        # print("shape dtfull=", dtfull.shape)
-        # print("content of dtfull :", dtfull)
         f.close
         end = time.time()
         print("Simulation performed in : ",timedelta(seconds=end - start))
+        App.ActiveDocument.recompute()
+
         return
 
     def IsActive(self):
@@ -174,8 +127,8 @@ class cmd_runHLMSimulation():
     def GetResources(self):
         return {"Pixmap"  : TOOL_ICONHLM,
                 "Accel"   : "",
-                "MenuText": "Run DVA MonteCarlo simulation",
-                "ToolTip" : "Create a DVA point inside the active body if there is one"}
+                "MenuText": "Run HLM simulation",
+                "ToolTip" : "Run a High Low Median Simulation for worst case study, and sensitive analysis"}
 
     def Activated(self):
         """

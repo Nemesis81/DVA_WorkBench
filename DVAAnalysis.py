@@ -7,7 +7,7 @@ import os
 
 TOOL_ICON = os.path.join(App.getUserAppDataDir(),
                          "Mod",
-                         "DVAWB",
+                         "DVA_WorkBench",
                          "ressources",
                          "DVA_Analysis.svg")
 
@@ -16,10 +16,10 @@ class cmd_dvaAnalysis():
     """Add DVA analysis to the document"""
 
     def GetResources(self):
-        return {"Pixmap"  : TOOL_ICON,  # the name of a svg file available in the resources
-                "Accel"   : "Shift+S",  # a default shortcut (optional)
-                "MenuText": "Create DVA Point",
-                "ToolTip" : "Create a DVA point inside the active body if there is one"}
+        return {"Pixmap"  : TOOL_ICON,
+                "Accel"   : "Shift+S",
+                "MenuText": "Create DVA Analysis",
+                "ToolTip" : "Create a DVA Analysis for main parameters"}
 
     def Activated(self):
         """
@@ -30,15 +30,16 @@ class cmd_dvaAnalysis():
                                            "DVA_Analysis")
 
         dvaAnalysis(obj)
-        #ViewProviderDvaAnalysis(obj.ViewObject)
         App.ActiveDocument.recompute()
         return
 
     def IsActive(self):
-        """Here you can define if the command must be active or not (greyed) if certain conditions
-        are met or not. This function is optional."""
+        """
+        Here you can define if the command must be active
+        or not (greyed) if certain conditions
+        are met or not. This function is optional.
+        """
         return True
-
 
 
 class dvaAnalysis():
@@ -49,13 +50,32 @@ class dvaAnalysis():
 
         self.Type = 'dvaAnalysis'
 
-        obj.addProperty('App::PropertyEnumeration', 'AnalysisType', 'DVA', 'Analisys type, Monte Carlo or HLM, ').AnalysisType
+        obj.addProperty('App::PropertyEnumeration',
+                        'AnalysisType',
+                        'DVA',
+                        'Analisys type, Monte Carlo or HLM').AnalysisType
+
         obj.AnalysisType = ["Monte Carlo", "High Low Mean"]
-        obj.addProperty("App::PropertyInteger", "Sample", "DVA", "quantity of loop in DVA analysis").Sample
-        obj.addProperty('App::PropertyEnumeration', 'Cp', 'DVA', 'Cp level expected').Cp
+        obj.addProperty("App::PropertyInteger",
+                        "Sample",
+                        "DVA",
+                        "quantity of loop in DVA analysis").Sample
+
+        obj.addProperty('App::PropertyEnumeration',
+                        'Cp',
+                        'DVA',
+                        'Cp level expected').Cp
+
         obj.Cp = [1, 1.33, 1.67, 2]
-        obj.addProperty("App::PropertyFile", "OutputFile", "DVA", "Path of the output file")
-        obj.addProperty("App::PropertyStringList", "ListPoints", "DVA", "List of measured point to be ouputed to the file")
+        obj.addProperty("App::PropertyFile",
+                        "OutputFile",
+                        "DVA",
+                        "Path of the output file")
+
+        obj.addProperty("App::PropertyStringList",
+                        "ListPoints",
+                        "DVA",
+                        "List of measured point to be ouputed to the file")
 
     def execute(self, obj):
         """
@@ -74,17 +94,19 @@ class ViewProviderDvaAnalysis:
 
     def attach(self, obj):
         """
-        Setup the scene sub-graph of the view provider, this method is mandatory
+        Setup the scene sub-graph of the view provider,
+         this method is mandatory
         """
         return
 
     def updateData(self, fp, prop):
         """
-        If a property of the handled feature has changed we have the chance to handle this here
+        If a property of the handled feature has changed we have the chance
+        to handle this here
         """
         return
 
-    def getDisplayModes(self,obj):
+    def getDisplayModes(self, obj):
         """
         Return a list of display modes.
         """
@@ -92,13 +114,15 @@ class ViewProviderDvaAnalysis:
 
     def getDefaultDisplayMode(self):
         """
-        Return the name of the default display mode. It must be defined in getDisplayModes.
+        Return the name of the default display mode.
+        It must be defined in getDisplayModes.
         """
         return "Shaded"
 
-    def setDisplayMode(self,mode):
+    def setDisplayMode(self, mode):
         """
-        Map the display mode defined in attach with those defined in getDisplayModes.
+        Map the display mode defined in attach with those defined
+        in getDisplayModes.
         Since they have the same names nothing needs to be done.
         This method is optional.
         """
@@ -113,7 +137,8 @@ class ViewProviderDvaAnalysis:
 
     def getIcon(self):
         """
-        Return the icon in XMP format which will appear in the tree view. This method is optional and if not defined a default icon is shown.
+        Return the icon in XMP format which will appear in the tree view.
+        This method is optional and if not defined a default icon is shown.
         """
 
         return """
@@ -150,7 +175,7 @@ class ViewProviderDvaAnalysis:
         """
         return None
 
-    def __setstate__(self,state):
+    def __setstate__(self, state):
         """
         Called during document restore.
         """

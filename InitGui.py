@@ -14,7 +14,7 @@ __url__ = "none"
 
 class DVA_Wb (Workbench):
 
-    ICONPATH = os.path.join(FreeCAD.getUserAppDataDir(),"Mod", "DVAWB", "ressources")
+    ICONPATH = os.path.join(FreeCAD.getUserAppDataDir(),"Mod", "DVA_WorkBench", "ressources")
     MenuText = "DVA Workbench"
     ToolTip = "A description of my workbench"
     Icon = os.path.join(ICONPATH, "DVA_RunMC_Simulation.svg")

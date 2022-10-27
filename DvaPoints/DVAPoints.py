@@ -6,7 +6,11 @@ import FreeCAD as App
 import FreeCADGui as Gui
 import os
 
-TOOL_ICON =os.path.join(App.getUserAppDataDir(),"Mod", "DVAWB", "ressources","DVA_Points.svg")
+TOOL_ICON =os.path.join(App.getUserAppDataDir(),
+                        "Mod",
+                        "DVA_WorkBench",
+                        "ressources",
+                        "DVA_Points.svg")
 
 
 class cmd_dvaPoint():
@@ -68,8 +72,7 @@ class dvaPoint():
         print(obj.prop)
         # print("line 68")
         # cp = App.ActiveDocument.getObject("DVA_Analysis")
-        # print(cp)
-
+        App.Console.PrintMessage("Change property: " + str(prop) + "\n")
         # if type(cp) == 'NoneType':
             # print('No DVA Analysis !')
         # else:

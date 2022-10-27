@@ -8,7 +8,7 @@ import FreeCAD as app
 import FreeCADGui as gui
 import DVAUtils as dvu
 
-doc= FreeCAD.ActiveDocument
+doc= app.ActiveDocument
 DvaPts = doc.findObjects("PartDesign::Point")
 DvaPts = dvu.listDvaPoints(DvaPts)
 Contraintes = doc.findObjects("App::FeaturePython")
