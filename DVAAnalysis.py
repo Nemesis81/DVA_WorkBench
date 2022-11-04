@@ -77,6 +77,15 @@ class dvaAnalysis():
                         "DVA",
                         "List of measured point to be ouputed to the file")
 
+        obj.addProperty("App::PropertyBool",
+                        "UpdateGui",
+                        "DVA",
+                        """
+                        if True the Gui will be updated during the simulation for
+                         visual feedbck.
+                         this will increase computation time!!
+                         """)
+
     def execute(self, obj):
         """
         Called on document recompute

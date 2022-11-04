@@ -60,11 +60,12 @@ class cmd_runMcSimulation():
         DvaPts = DvaPts + Contraintes
         # Mesure are the measurement from Assy3 with DVA upgrade
         Mesure = Doc.getObject("DVA_Analysis").ListPoints
-        InitialState = dvu.initialStateSave(Contraintes + DvaPts)
+        InitialState = dvu.initialStateSave(DvaPts)
+
+        b = []
 
         for x in np.arange(0, Repet, 1):
             a = []
-            b = []
 
             dvu.dvaPtRndVal(DvaPts, a, b, x)
             Gui.runCommand('asm3CmdSolve',0)
@@ -82,14 +83,16 @@ class cmd_runMcSimulation():
                 dtNames = np.expand_dims(dtNames,axis=1)
 
             dt = np.asarray(a)
-            dt=np.expand_dims(dt,axis=1)
+            dt = np.expand_dims(dt,axis=1)
 
             if x==0:
                 dt2=dt
 
-            dt2=np.append(dt2,dt, axis=1)
+            dt2 = np.append(dt2, dt, axis=1)
             dvu.backInitialState(InitialState, Doc)
-            #Gui.updateGui()
+            if Doc.getObject("DVA_Analysis").UpdateGui:
+                Gui.updateGui()
+
             print("simulation loop:", x)
 
         dtfull = np.concatenate((dtNames,dt2), axis=1)
@@ -98,12 +101,8 @@ class cmd_runMcSimulation():
                             columns=dtfull[0,1:],
                             dtype=float)
 
-        hist = pddf[["Measure1 GPy",
-                      "Measure1 GPx",
-                      "Measure1 GPz",
-                      "MeasurePointPlane",
-                      "MeasurePointPlane001",
-                      "MeasurePointPlane002"]].hist(bins=6)
+        hist = pddf[["MeasurePoints",
+                      "MeasurePoints001"]].hist(bins=8)
 
         pddf.to_csv(FilePath, sep=',', header=True)
 

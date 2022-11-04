@@ -54,27 +54,34 @@ def initialStateSave(Objs):
 
 def backInitialState(dict, doc):
     for pt in dict:
-        b = dict
+        # b = dict
         if isinstance(pt, str):
             b = doc.getObject(pt)
             values = dict.get(pt)
+            # print("if is instnce = ",b.Name, b.Distance)
+            b.Distance = values[4]
 
         else:
             b = pt
             values = dict.get(pt)
+            #   print("else = ",b.Name)
+            b.AttachmentOffset.Base.x = values[4]
+            b.AttachmentOffset.Base.y = values[5]
+            b.AttachmentOffset.Base.z = values[6]
 
         b.Law = values[0]
         b.Tolerance = values[1]
         b.Meanshift = values[2]
         b.Sd = values[3]
 
-        if hasattr(pt, "Law") and hasattr(pt, "Placement"):
-            b.AttachmentOffset.Base.x = values[4]
-            b.AttachmentOffset.Base.y = values[5]
-            b.AttachmentOffset.Base.z = values[6]
+        #if hasattr(pt, "Law") and hasattr(pt, "Placement"):
 
-        elif hasattr(pt, "Law") and hasattr(pt, "Distance"):
-            pt.Distance = values[4]
+
+
+        #if hasattr(pt, "Distance"):
+            #print("inside elif hasattr(pt, Law) and hasattr(pt, Distance)",
+                  #pt.Distance)
+            #b.Distance = values[4]
 
 
 def affectValue(law, **kwargs):
