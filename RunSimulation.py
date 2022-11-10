@@ -31,7 +31,10 @@ class cmd_runMcSimulation():
         return {"Pixmap"  : TOOL_ICONMC,
                 "Accel"   : "Shift+S",
                 "MenuText": "Run DVA MonteCarlo simulation",
-                "ToolTip" : "Create a DVA point inside the active body if there is one"}
+                "ToolTip" : """
+                    run the DVA Monte Caro simulation
+                    a DVA anaysis is required
+                    """}
 
     def Activated(self):
         """
@@ -70,14 +73,6 @@ class cmd_runMcSimulation():
             dvu.dvaPtRndVal(DvaPts, a, b, x)
             Gui.runCommand('asm3CmdSolve',0)
 
-            for mes in Mesure:
-                MesPt = Doc.getObject(mes)
-                if hasattr(MesPt,"Measurement"):
-                    if MesPt.Measurement:
-                        a.append(float(MesPt.Distance))
-                        if x==0:
-                            b.append(MesPt.Label)
-
             if x==0:
                 dtNames = np.asarray(b)
                 dtNames = np.expand_dims(dtNames,axis=1)
@@ -100,9 +95,9 @@ class cmd_runMcSimulation():
         pddf = pd.DataFrame(data=dtfull[1:,1:],
                             columns=dtfull[0,1:],
                             dtype=float)
-
-        hist = pddf[["MeasurePoints",
-                      "MeasurePoints001"]].hist(bins=8)
+        for mes in Mesure:
+            mes = Doc.getObject(mes)
+            hist = pddf[[mes.Label]].hist()
 
         pddf.to_csv(FilePath, sep=',', header=True)
 
@@ -120,14 +115,15 @@ class cmd_runMcSimulation():
 
 
 
-
-
 class cmd_runHLMSimulation():
     def GetResources(self):
         return {"Pixmap"  : TOOL_ICONHLM,
                 "Accel"   : "",
                 "MenuText": "Run HLM simulation",
-                "ToolTip" : "Run a High Low Median Simulation for worst case study, and sensitive analysis"}
+                "ToolTip" : """
+                    Run a High Low Median Simulation for worst case study, and sensitive analysis.
+                    requires a DVA Analysis
+                    """}
 
     def Activated(self):
         """
@@ -136,8 +132,8 @@ class cmd_runHLMSimulation():
         start = time.time()
         print("starting simulation at: ", start)
         Doc= App.ActiveDocument
-        FilePath = Doc.getObject("DVA_Analysis").Output_File
-
+        FilePath = Doc.getObject("DVA_Analysis").OutputFile
+        Repet = Doc.getObject("DVA_Analysis").Sample
         with open(FilePath, "w", newline="") as f:
             data = csv.writer(f)
             dele = []
@@ -153,35 +149,20 @@ class cmd_runHLMSimulation():
         Contraintes = Doc.findObjects("App::FeaturePython")
         Contraintes = dvu.listAssyConstraints(Contraintes)
 
-        Repet = Doc.getObject("DVA_Analysis").Sample
-
+        DvaPts = DvaPts + Contraintes
         # Mesure are the measurement from Assy3 with DVA upgrade
-        Mesure = Doc.getObject("DVA_Analysis").DVA_ListPoints
-        InitialState = dvu.initialStateSave(Contraintes + DvaPts, Doc)
+        Mesure = Doc.getObject("DVA_Analysis").ListPoints
+        InitialState = dvu.initialStateSave(DvaPts)
 
-        # loop on all modifcation point, constraint..
-        a = []
         b = []
+        a = []
+
         for dvaPt in DvaPts:
             dvu.backInitialState(InitialState, Doc)
             for hlm in np.arange(0, 3, 1):
                 dvu.backInitialState(InitialState, Doc)
 
-                Variation = Doc.getObject(dvaPt)
-
-                Variation.AttachmentOffset.Base.x = Variation.AttachmentOffset.Base.x
-                + dvu.affectHLMValue(hlm, tolerance=Variation.Tolerance)
-
-                Variation.AttachmentOffset.Base.y = Variation.AttachmentOffset.Base.y
-                + dvu.affectHLMValue(hlm, tolerance=Variation.Tolerance)
-
-                Variation.AttachmentOffset.Base.z = Variation.AttachmentOffset.Base.z
-                + dvu.affectHLMValue(hlm, tolerance=Variation.Tolerance)
-
-                # then for each modification, record status of all mesaurement
-                if hasattr(Variation,"Measurement"):
-                    if Variation.Measurement:
-                        a.extend(dvu.recordMeasurement(Variation))
+                dvu.dvaHLMRndVal(dvaPt, a, b, hlm)
 
                 Gui.runCommand('asm3CmdSolve',0)
 
@@ -190,24 +171,10 @@ class cmd_runHLMSimulation():
                     if hasattr(MesPt,"Measurement"):
                         if MesPt.Measurement:
                             a.append(float(MesPt.Distance))
-                            if hlm==0:
+                            if x==0:
                                 b.append(MesPt.Label)
 
-        for Cstr in Contraintes:
-            dvu.backInitialState(InitialState, Doc)
-            for hlm in np.arange(0, 3, 1):
-                Variation = Doc.getObject(Cstr)
-                Variation.Distance = str(dvu.affectHLMValue(hlm,tolerance=Variation.Tolerance))
-                if Variation.Measurement:
-                    a.append(float(Variation.Distance))
-                    if hlm == 0: b.append(Variation.Label)
-        print(a)
-
-
-
-
-        # then set it again to initial backInitialState
-        # then start again with next point
+        print(b," et ", a)
 
 
     def IsActive(self):

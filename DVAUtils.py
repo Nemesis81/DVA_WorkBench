@@ -183,14 +183,63 @@ def dvaPtRndVal(obj, vallist, ptname, repet):
                                    dvaPt.Label + " GPx",
                                    dvaPt.Label + " GPy",
                                    dvaPt.Label + " GPz"))
+
         elif dvaPt.isDerivedFrom("App::FeaturePython"):
-            dvaPt.Distance = str(affectValue(dvaPt.Law,
-                                             tolerance=dvaPt.Tolerance,
-                                             sigma=dvaPt.Sd))
+            if repet == 0:
+                ptname.append(dvaPt.Label)
+
+            if dvaPt.ConstraintType=="PointsPlaneDistance":
+                dvaPt.Distance = str(affectValue(dvaPt.Law,
+                                                 tolerance=dvaPt.Tolerance,
+                                                 sigma=dvaPt.Sd))
+                dvaPt.recompute(True)
+
+
             if dvaPt.Measurement:
+                dvaPt.recompute(True)
                 vallist.append(float(dvaPt.Distance))
 
-                if repet == 0:
-                    ptname.append(dvaPt.Label)
+
+
+    return vallist, ptname
+
+def dvaHLMRndVal(obj, vallist, ptname, repet):
+    """
+    obj => DVApoint object or cstr to affect a new alues based on Law
+    vallist => list of values
+    ptname => list of point name
+    repet => numbers of repet to get name on 1st loop
+    returns a list of values and a list of point name
+    """
+    if obj.isDerivedFrom("Part::Feature"):
+        ptx = affectValue(obj.Law, tolerance=obj.Tolerance)
+        pty = affectValue(obj.Law, tolerance=obj.Tolerance)
+        ptz = affectValue(obj.Law, tolerance=obj.Tolerance)
+
+        obj.AttachmentOffset.Base.x = obj.AttachmentOffset.Base.x + ptx
+        obj.AttachmentOffset.Base.y = obj.AttachmentOffset.Base.y + pty
+        obj.AttachmentOffset.Base.z = obj.AttachmentOffset.Base.z + ptz
+        obj.recompute(True)
+
+        if obj.Measurement:
+            vallist.extend(recordMeasurement(obj))
+
+            if repet == 0:
+                ptname.extend((obj.Label + " x",
+                               obj.Label + " y",
+                               obj.Label + " z",
+                               obj.Label + " GPx",
+                               obj.Label + " GPy",
+                               obj.Label + " GPz"))
+    elif obj.isDerivedFrom("App::FeaturePython") and obj.ConstraintType=="PointsPlaneDistance":
+        obj.Distance = str(affectValue(obj.Law,
+                                         tolerance=obj.Tolerance,
+                                         sigma=obj.Sd))
+        if obj.Measurement and (obj.ConstraintType=="PointsPlaneDistance" or obj.ConstraintType=="MeasurePoints"):
+            print(obj.Distance)
+            vallist.append(float(obj.Distance))
+
+            if repet == 0:
+                ptname.append(obj.Label)
 
     return vallist, ptname
