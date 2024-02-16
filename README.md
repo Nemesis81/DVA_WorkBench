@@ -29,7 +29,7 @@ As for now it only works with FreeCAD Linkbranch, due to this [bug](https://foru
 1. develop different kind of analysis:
   * Monte carlo analysis.
   * sensitive analysis based on HLM (High Mean Low) values of each tolerance of the assembly
-  * Worst Case analysis based on all value in Max/min condition (need to no direction of impact....)
+  * Worst Case analysis based on all value in Max/min condition (need to know direction of impact....)
 2. integrate a html report directly in freecad (Streamlit? matplot only?)
 3. link DVA constraint and DVA point within DVA folder for clarity.
 4. see the possiblity to revive the [GD&T WB](https://github.com/juanvanyo/FreeCAD-GDT)
